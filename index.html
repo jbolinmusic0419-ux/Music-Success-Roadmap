@@ -79,8 +79,8 @@
   <h1>🎵 Free Music Success Roadmap</h1>
   <p>Enter your email and get the PDF roadmap to go from beginner to music career.</p>
 
-  <form id="optin-form" action="" method="POST">
-    <input type="email" id="email" placeholder="Your email" required>
+  <form id="optin-form" method="POST" action="https://script.google.com/macros/s/AKfycbwckYra9QkXklzC62vN7ftqA9zV-Sygzdld54p6oAsqMtgxKC5vVe_rsu3LuCfb124N/exec">
+    <input type="email" id="email" name="email" placeholder="Your email" required>
     <button type="submit">Send Me the PDF</button>
   </form>
 
@@ -95,13 +95,19 @@
 
   form.addEventListener('submit', function(e) {
     e.preventDefault();
-    const email = document.getElementById('email').value;
 
-    // Placeholder: connect this to your email service (ConvertKit, Mailchimp, etc.)
-    console.log('Email collected:', email);
-
-    form.style.display = 'none';
-    successMessage.style.display = 'block';
+    fetch(form.action, {
+      method: 'POST',
+      body: new URLSearchParams(new FormData(form))
+    })
+    .then(response => response.json())
+    .then(data => {
+      if(data.status === "success"){
+        form.style.display = 'none';
+        successMessage.style.display = 'block';
+      }
+    })
+    .catch(err => console.error(err));
   });
 </script>
 
