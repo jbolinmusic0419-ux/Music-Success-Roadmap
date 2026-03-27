@@ -64,13 +64,6 @@
     transform: scale(1.05);
   }
 
-  .success-message {
-    display: none;
-    font-size: 16px;
-    font-weight: bold;
-    color: #27ae60;
-    margin-top: 20px;
-  }
 </style>
 </head>
 <body>
@@ -79,37 +72,12 @@
   <h1>🎵 Free Music Success Roadmap</h1>
   <p>Enter your email and get the PDF roadmap to go from beginner to music career.</p>
 
-  <form id="optin-form" method="POST" action="https://script.google.com/macros/s/AKfycbwckYra9QkXklzC62vN7ftqA9zV-Sygzdld54p6oAsqMtgxKC5vVe_rsu3LuCfb124N/exec">
-    <input type="email" id="email" name="email" placeholder="Your email" required>
+  <!-- Simple form that submits directly to Google Apps Script -->
+  <form method="POST" action="https://script.google.com/macros/s/AKfycbwckYra9QkXklzC62vN7ftqA9zV-Sygzdld54p6oAsqMtgxKC5vVe_rsu3LuCfb124N/exec">
+    <input type="email" name="email" placeholder="Your email" required>
     <button type="submit">Send Me the PDF</button>
   </form>
-
-  <div class="success-message" id="success-message">
-    Thanks! Check your email for the roadmap.
-  </div>
 </div>
-
-<script>
-  const form = document.getElementById('optin-form');
-  const successMessage = document.getElementById('success-message');
-
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    fetch(form.action, {
-      method: 'POST',
-      body: new URLSearchParams(new FormData(form))
-    })
-    .then(response => response.json())
-    .then(data => {
-      if(data.status === "success"){
-        form.style.display = 'none';
-        successMessage.style.display = 'block';
-      }
-    })
-    .catch(err => console.error(err));
-  });
-</script>
 
 </body>
 </html>
